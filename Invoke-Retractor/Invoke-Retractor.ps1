@@ -160,7 +160,7 @@ function Invoke-Retractor()
     }
 
 
-    if ($Group -ne $null)
+    if (![String]::IsNullOrEmpty($Group))
     {
         Write-Host -ForegroundColor Cyan "[~]" -NoNewline
         Write-Host " Adding " -NoNewline
@@ -179,7 +179,7 @@ function Invoke-Retractor()
         {
             foreach($SeatbeltCommand in $SeatbeltCommands)
             {
-                if ($SeatbeltCommand.Group.Contains($Group))
+                if ($SeatbeltCommand.Group.Contains((Get-Culture).TextInfo.ToTitleCase($Group)))
                 {
                     $CSFiles += $SeatbeltCommand.File
                     $Using += $SeatbeltCommand.Name
